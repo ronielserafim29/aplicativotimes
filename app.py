@@ -68,4 +68,4 @@ def sortear():
     return render_template('index.html', time1=time1, time2=time2, reservas=reservas, texto=texto, total_time1=total_time1, total_time2=total_time2)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
