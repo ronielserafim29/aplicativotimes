@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Sortear Times</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f6f8;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+    textarea {
+      resize: none; 
+    }
+    .team-box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mb-4">Bora Pederneiras FC</h1>
+    
+  <form action="/sortear" method="post">
+    <div class = "mb-3">
+    <label for="jogadores">Insira os jogadores (ex: joão 9 defesa):</label><br>
+    <textarea name="jogadores" rows="10" class="form-control" placeholder="Exemplo:&#10;daniel 9 ataque&#10;joão 8 defesa">{{ texto or ''}}</textarea><br><br>
+      </div>
+   <div class="container">
+    <button type="submit" class="btn btn-primary w-50">Sortear times</button>
+   </div>
+  </form>
+
+  {% if time1 %}
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="team-box">
+          <h4 class="text-center">Time 1</h4>
+          <ul class="list-group">
+      <ul>
+        {% for j in time1 %}
+          <li>{{ j.nome }} - Nota: {{ j.nota }} - {{ 'Defesa' if j.posicao == 1 else 'Ataque' }}</li>
+        {% endfor %}
+        <div class="text-end fw-bold mt-2">Total: {{ total_time1 }}</div>
+      </ul>
+      </div>
+    </div>    
+    
+    <div class="col-md-6">
+      <div class="team-box">
+        <h4 class="text-center">Time 2</h4>
+      <ul>
+        {% for j in time2 %}
+          <li>{{ j.nome }} - Nota: {{ j.nota }} - {{ 'Defesa' if j.posicao == 1 else 'Ataque' }}</li>
+        {% endfor %}
+        <div class="text-end fw-bold mt-2">Total: {{ total_time2 }}</div>
+      </ul>
+      </div>
+    </div>
+      <div class="col-md-6">
+        <div class=team-box>
+          <h4 class="text-center">Reservas</h4>
+          <ul>
+            {% for j in reservas %}
+              <li>{{ j.nome }} - Nota: {{ j.nota }} - {{ 'Defesa' if j.posicao == 1 else 'Ataque' }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+  {% endif %}
+</body>
+</html>
